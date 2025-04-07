@@ -6,7 +6,6 @@ import argparse
 import csv
 import json
 from pathlib import Path
-from xml.etree import ElementTree
 
 # packages
 import networkx
@@ -14,6 +13,7 @@ import networkx
 # projects
 import lmss.owl
 import lmss.graph
+import defusedxml.ElementTree
 
 
 class LMSSGraphQA:
@@ -357,10 +357,10 @@ def check_xml_lang_attribs(owl_buffer: bytes) -> list[dict]:
     findings = []
 
     # create an ElementTree parser
-    parser = ElementTree.XMLParser()
+    parser = defusedxml.ElementTree.XMLParser()
 
     # parse the OWL file
-    owl_tree = ElementTree.fromstring(owl_buffer, parser=parser)
+    owl_tree = defusedxml.ElementTree.fromstring(owl_buffer, parser=parser)
 
     # findall elements with xml:lang attributes using NSMAP
     for element in owl_tree.iter():
