@@ -77,7 +77,7 @@ def get_lmss_owl_etree(
         lxml.etree._ElementTree: The latest version of the LMSS OWL data as an lxml.etree document.
     """
     # setup a parser
-    return lxml.etree.fromstring(get_lmss_owl(branch, repo_artifact_url))
+    return lxml.etree.fromstring(get_lmss_owl(branch, repo_artifact_url), parser=lxml.etree.XMLParser(resolve_entities=False))
 
 
 def get_lmss_owl_rdflib(
